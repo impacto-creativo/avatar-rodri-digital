@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avatar Rodri Digital</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #0a0a1a;
+        overflow: hidden;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      #canvas-container {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+      }
+      #hud {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      #status-panel {
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 12px 16px;
+        color: #ccc;
+        font-size: 13px;
+        min-width: 200px;
+      }
+      #status-panel h3 {
+        color: #7eb8f7;
+        font-size: 14px;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+      }
+      #status-emotion,
+      #status-state,
+      #status-speech {
+        margin: 4px 0;
+      }
+      #status-speech {
+        color: #a0d4a0;
+        font-style: italic;
+        max-width: 220px;
+        word-break: break-word;
+      }
+      #connection-indicator {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 8px 14px;
+        color: #ccc;
+        font-size: 13px;
+      }
+      #connection-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #888;
+        transition: background 0.3s;
+      }
+      #connection-dot.connected {
+        background: #4caf50;
+        box-shadow: 0 0 6px #4caf50;
+      }
+      #connection-dot.disconnected {
+        background: #f44336;
+      }
+      #speech-bubble {
+        position: absolute;
+        bottom: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(20, 40, 80, 0.92);
+        border: 1px solid #4a90d9;
+        border-radius: 16px;
+        padding: 14px 20px;
+        color: #e8f4ff;
+        font-size: 16px;
+        max-width: 500px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.4s;
+        pointer-events: none;
+      }
+      #speech-bubble.visible {
+        opacity: 1;
+      }
+      #speech-bubble::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #4a90d9;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="canvas-container">
+      <div id="hud">
+        <div id="status-panel">
+          <h3>🤖 Rodri Digital</h3>
+          <div id="status-state">Estado: <span id="state-value">Inactivo</span></div>
+          <div id="status-emotion">Emoción: <span id="emotion-value">Neutral</span></div>
+          <div id="status-speech" id="speech-preview"></div>
+        </div>
+        <div id="connection-indicator">
+          <div id="connection-dot" class="disconnected"></div>
+          <span id="connection-label">MCP: Desconectado</span>
+        </div>
+      </div>
+      <div id="speech-bubble"></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
